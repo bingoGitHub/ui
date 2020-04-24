@@ -1691,7 +1691,7 @@ metrics:
   istio-request-duration-p90-top10: P90 Request Latency by Service
   istio-request-duration-p50-top10: P50 Request Latency by Service
   node-cpu-load: 节点负载
-  node-cpu-usage: CPU使用率  
+  node-cpu-usage: CPU使用率
   node-disk-io: 磁盘I/O
   node-fs-usage-percent: 磁盘使用率
   node-memory-usage: 内存使用率
@@ -10182,3 +10182,28 @@ selectValueCheck:
       =1 {请选择新的值。以下内容不再有效:}
       other {请选择新的值。以下内容不再有效:}
     }
+##############################
+# Custom label
+##############################
+custom:
+  # nav
+  nav:
+    logo: 云应用开发中台
+    admin:
+      dockerRepository: Docker仓库
+  # aside
+  aside:
+    admin:
+      globalManagement: 全局管理
+      containerPlatform:
+        tab: 容器平台
+        clusterManagement: 集群管理
+        projectManagement: 项目管理
+      middlewareStore: 中间件商店
+      generalComponentsStore: 通用组件商店
+      microservice: 微服务平台
+      cicd: CI/CD
+      operatePlatform:
+        tab: 运营平台
+        cluster: 集群运营
+        project: 项目运营

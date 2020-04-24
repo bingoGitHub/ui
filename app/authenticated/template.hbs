@@ -1,14 +1,22 @@
 {{#unless isPopup}}
-  {{page-header
-    pageScope=pageScope
-    goToPrevious="goToPrevious"
+  {{page-header-cs
+          pageScope=pageScope
+          goToPrevious="goToPrevious"
   }}
 {{/unless}}
-<main class="clearfix">
-  {{outlet}}
-</main>
+<div class="flex">
+  {{#unless isPopup}}
+    {{page-aside-cs
+            pageScope="aside"
+            asideOpen="no"
+    }}
+  {{/unless}}
+  <main class="clearfix page-main">
+    {{outlet}}
+  </main>
+</div>
 {{#unless isPopup}}
   {{page-footer
-    showAbout="showAbout"
+          showAbout="showAbout"
   }}
 {{/unless}}

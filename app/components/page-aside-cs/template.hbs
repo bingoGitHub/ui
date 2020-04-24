@@ -1,0 +1,115 @@
+<ul role="menubar" class="page-aside-menu">
+  <li class="page-aside-menu-item-group">
+    <ul>
+      <li class="page-aside-menu-item item clip" style="padding-left: 20px;">
+        <a href="{{href-to "global-admin"}}">
+          {{t "custom.aside.admin.globalManagement"}}
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="page-aside-submenu">
+    <div class="page-aside-submenu__title" style="padding-left: 20px;">
+      {{t "custom.aside.admin.containerPlatform.tab"}}
+      <span class="icon icon-chevron-down"></span>
+    </div>
+    <ul role="menu" class="page-aside-menu" style="display: none;">
+      {{page-aside-cluster-cs
+              pageScope="cluster"
+      }}
+      {{page-aside-project-cs
+              pageScope="project"
+      }}
+    </ul>
+  </li>
+  {{#each navTree as |item|}}
+    {{#if item.submenu.length}}
+      <li aria-haspopup="true" aria-expanded="true" class="page-aside-submenu">
+        <div class="page-aside-submenu__title" style="padding-left: 20px;">
+          {{#if (or (not item.resource) (rbac-allows resource=item.resource scope=item.resourceScope))}}
+            {{#if item.route}}
+              {{#link-to-as-attrs
+                      ourRoute=item.route
+                      ctx=item.ctx
+                      qp=item.qp
+                      currentWhen=item.currentWhen
+                      activeParent="LI"
+                      role="button"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+              }}
+                {{t item.localizedLabel default=item.label}}
+                <span class="icon icon-chevron-down"/>
+              {{/link-to-as-attrs}}
+            {{else}}
+                {{t item.localizedLabel default=item.label}}
+                <span class="icon icon-chevron-down"/>
+            {{/if}}
+          {{/if}}
+        </div>
+        <ul role="menu" class="page-aside-menu" style="{{if (eq asideOpen "no") "display: none" ""}}">
+          <li class="page-aside-menu-item-group">
+            <ul>
+              {{#each item.submenu as |subitem|}}
+                {{#if subitem.route}}
+                  {{#if (or (not subitem.resource) (rbac-allows resource=subitem.resource scope=subitem.resourceScope))}}
+                    <li class="page-aside-menu-item" style="padding-left: 40px;">
+                      {{#link-to-as-attrs
+                              ourRoute=subitem.route
+                              ctx=subitem.ctx
+                              qp=subitem.qp
+                              activeParent="LI"
+                              currentWhen=subitem.currentWhen
+                      }}
+                        <span>
+                          {{t subitem.localizedLabel default=subitem.label}}
+                        </span>
+                        <i class="{{subitem.icon}}"/>
+                      {{/link-to-as-attrs}}
+                    </li>
+                  {{/if}}
+                {{else if subitem.divider}}
+                  <li class="divider"></li>
+                {{else}}
+                {{! Just a label }}
+                  <li class="page-aside-menu-item" style="padding-left: 40px;">
+                  <span>
+                    {{t subitem.localizedLabel default=subitem.label}}
+                  </span>
+                    <i class="{{subitem.icon}}"/>
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ul>
+          </li>
+        </ul>
+      </li>
+    {{else if item.route}}
+      {{#if (or (not item.resource) (rbac-allows resource=item.resource scope=item.resourceScope))}}
+      {{! No submenu }}
+        <li class="page-aside-menu-item-group">
+          <ul>
+            <li  style="padding-left: 20px;" class="page-aside-menu-item {{if (and item.disableIfClusterNotReady (not cluster.isReady)) "pointer-events-none"}}">
+              {{#link-to-as-attrs
+                      ourRoute=item.route
+                      ctx=item.ctx
+                      qp=item.qp
+                      activeParent="LI"
+                      currentWhen=item.currentWhen
+                      class="nav-link"
+              }}
+                {{t item.localizedLabel default=item.label}}
+              {{/link-to-as-attrs}}
+            </li>
+          </ul>
+        </li>
+      {{/if}}
+    {{else}}
+      <li class="page-aside-menu-item-group">
+        <ul>
+          <li class="page-aside-menu-item" style="padding-left: 20px;">{{t item.localizedLabel default=item.label}}</li>
+        </ul>
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>

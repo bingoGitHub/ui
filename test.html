@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Emberjs </title>
+  <!-- CDN's -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ember.js/1.10.0/ember.min.js"></script>
+  <script src="https://builds.emberjs.com/tags/v1.10.0-beta.3/ember-template-compiler.js"></script>
+  <script src="https://builds.emberjs.com/release/ember.debug.js"></script>
+  <script src="https://builds.emberjs.com/beta/ember-data.js"></script>
+</head>
+<body>
+<div class="global">
+  <ul class="list-unstyled">
+    <li class="item clip inactive">
+      <a href="/g" class="inactive">
+        Global
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="search">
+  <input autocomplete="off" autocapitalize="none" style="" placeholder="Search..." id="ember437"
+         class="ember-text-field ember-view" type="text">
+</div>
+
+<div class="clusters">
+  <label class="acc-label">
+    Clusters
+  </label>
+
+  <ul class="list-unstyled no-hover-entry" style="height: 150px">
+    <li data-cluster-id="local" class="item clip cluster active ">
+      <a href="/c/local" id="ember438" class="top active ember-view"> local
+      </a>
+      <p class="state">Active</p>
+    </li>
+  </ul>
+</div>
+
+<div class="projects">
+  <label class="acc-label">
+    Projects in local
+  </label>
+
+  <ul class="list-unstyled" style="height: 150px">
+    <li data-project-id="local:p-tsgwm" class="item clip project  inactive">
+      <a href="/p/local:p-tsgwm" id="ember439" class="top ember-view"> Default
+      </a>
+      <p class="state">
+        Active
+      </p>
+    </li>
+    <li data-project-id="local:p-dgj42" class="item clip project  inactive">
+      <a href="/p/local:p-dgj42" id="ember440" class="top ember-view"> System
+      </a>
+      <p class="state">
+        Active
+      </p>
+    </li>
+  </ul>
+</div>
+
+
+<script type="text/x-handlebars">
+  <h2>Click the links to navigate</h2>
+  {{#linkTo 'index'}}index{{/linkTo}}
+  {{#linkTo 'description'}}description{{/linkTo}}
+  {{#linkTo 'description.fruits'}}description/fruits{{/linkTo}}
+  {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="index">
+  <!-- default route -->
+  <h2>Fruits</h2>
+</script>
+
+<script type="text/x-handlebars" data-template-name="description/index">
+  <!-- this is description route
+  <h2>Description</h2 -->
+  <p>Fruits are helps to gain your strength.</p>
+</script>
+
+<script type="text/x-handlebars" data-template-name="description/fruits">
+  //fruits route is of the description route
+  <h2>Fruits Page</h2>
+  <ul>
+    <li>Orange</li>
+    <li>Apple</li>
+    <li>Banana</li>
+  </ul>
+</script>
+
+<script type="text/javascript">
+  App = Ember.Application.create();
+
+  App.Router.map(function () {
+    //nested routes: fruits within description
+    this.resource('description', function () {
+      this.route('fruits');
+    });
+  });
+</script>
+</body>
+</html>

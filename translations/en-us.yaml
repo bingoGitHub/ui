@@ -3972,7 +3972,7 @@ clusterNew:
       label: EIP Share Type
   rke:
     upgradeStrategy:
-      maximumWorkersDown: 
+      maximumWorkersDown:
         view:
           count: "{value}"
           percentage: "{value}%"
@@ -10125,3 +10125,30 @@ selectValueCheck:
       =1 {Please select a new value. The following is no longer valid:}
       other {Please select new values. The following are no longer valid:}
     }
+
+##############################
+# Custom label
+##############################
+custom:
+  # nav
+  nav:
+    logo: Cloud App Dev Center
+    admin:
+      dockerRepository: Docker Repository
+  # aside
+  aside:
+    admin:
+      globalManagement: Global Management
+      containerPlatform:
+        tab: Container Platform
+        clusterManagement: Cluster Management
+        projectManagement: Project Management
+      middlewareStore: Middleware Store
+      generalComponentsStore: General Components
+      microservice: Microservice
+      cicd: CI/CD
+      operatePlatform:
+        tab: Operate Platform
+        cluster: Cluster Operate
+        project: Poject Operate
+
